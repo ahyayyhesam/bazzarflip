@@ -1,18 +1,16 @@
-# app.py
 from flask import Flask, render_template, jsonify
 import requests
 from datetime import datetime
 
 app = Flask(__name__)
 
-# Configuration
 MIN_FLIP_PRICE = 100
 MAX_FLIP_PRICE = 500000
 MIN_FLIP_VOLUME = 100000
-MIN_CRAFT_PROFIT = 0  # Minimum profit for crafts to show
+MIN_CRAFT_PROFIT = 0
 BAZAAR_TAX = 0.00
 
-# Example crafting recipe (kept for demonstration)
+
 CRAFT_RECIPES = {
     # example: "ENCHANTED_DIAMOND": {"materials": {"DIAMOND": 160}, "amount": 1},
 }
@@ -54,7 +52,7 @@ def calculate_flip_profits(products):
                 "profit": profit,
                 "margin": margin,
                 "volume": volume,
-                "potential": profit * (volume // 1000)  # Estimated weekly profit
+                "potential": profit * (volume // 1000)
             })
     
     return sorted(flips, key=lambda x: (-x['margin'], -x['potential']))
@@ -89,7 +87,7 @@ def calculate_craft_profits(products):
                     "margin": margin,
                     "materials": ", ".join(materials_text),
                     "volume": volume,
-                    "potential": profit * (volume // 1000)  # Estimated weekly profit
+                    "potential": profit * (volume // 1000)
                 })
                 
         except KeyError:
@@ -116,7 +114,7 @@ def get_data():
     best = get_best_opportunities(flips, crafts)
     
     return jsonify({
-        "flips": flips[:100],  # Top 100 flips
+        "flips": flips[:100],
         "crafts": crafts,
         "best": best,
         "timestamp": datetime.now().isoformat(),
