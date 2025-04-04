@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bazaar Profit Master</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1>Bazaar Profit Master</h1>
+            <div class="header-controls">
+                <button class="refresh-btn" onclick="loadData()">
+                    <span class="refresh-icon">↻</span> Refresh
+                </button>
+                <div class="last-updated" id="lastUpdated">Loading...</div>
+            </div>
+        </header>
+
+        <div class="dashboard">
+            <!-- Stats Overview -->
+            <div class="stats-card">
+                <h2>Market Overview</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value" id="totalFlips">0</div>
+                        <div class="stat-label">Flip Opportunities</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="totalCrafts">0</div>
+                        <div class="stat-label">Craft Recipes</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="avgFlipMargin">0%</div>
+                        <div class="stat-label">Avg Flip Margin</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="avgCraftMargin">0%</div>
+                        <div class="stat-label">Avg Craft Margin</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Best Opportunities -->
+            <div class="section">
+                <h2>⭐ Best Money Makers</h2>
+                <div class="opportunities-grid" id="bestOpportunities"></div>
+            </div>
+
+            <!-- Flip Opportunities -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>Flip Opportunities</h2>
+                    <div class="sort-controls">
+                        <button class="sort-btn active" data-sort="margin">Sort by Margin</button>
+                        <button class="sort-btn" data-sort="profit">Sort by Profit</button>
+                        <button class="sort-btn" data-sort="potential">Sort by Potential</button>
+                    </div>
+                </div>
+                <div class="items-grid" id="flipOpportunities"></div>
+            </div>
+
+            <!-- Crafting Opportunities -->
+            <div class="section">
+                <h2>Crafting Profits</h2>
+                <div class="items-grid" id="craftOpportunities"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
